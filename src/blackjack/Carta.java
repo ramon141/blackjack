@@ -153,30 +153,33 @@ public class Carta {
         Integer i = rand.nextInt(13) + 1;
         
         if(i <= 10 && i != 1) carta = new Carta(i.toString());
-        else if(i == 1)       carta = new Carta("A");
-        else if(i == 11)      carta = new Carta("J");
+        else if(i == 1)       carta = new Carta("A"); /*É utilizado valores como: */
+        else if(i == 11)      carta = new Carta("J"); /* A --> 1; J --> 11; etc, vale ressaltar que esses NÃO são os valores numéricos das cartas e sim uma forma de selecionar uma das 13 cartas diferentes do baralho*/
         else if(i == 12)      carta = new Carta("Q");
         else if(i == 13)      carta = new Carta("K");
         else throw new Exception("Há um erro de lógica na classe Carta. O valor para carta: " + i + " não é permitido");
 
-        carta.setTipo(tipo);
-        return carta;
+        carta.setTipo(tipo);//O tipo é passado por parâmetro nessa função.
+        return carta; //Retorna a carta criada.
     }
 
     /*Retorna uma carta aleatória em tipo e número*/
     public static Carta generateRandomCarta() throws Exception{
         Random rand = new Random();
 
-        //Eu obtenho um valor que está entre 1..13 (estes inclusos)
+        //Eu obtenho um valor que está entre 1..4 (estes inclusos)
         Integer i = rand.nextInt(4) + 1;
         
-        if(i == TIPO_PAUS)         return generateRandomCarta(TIPO_PAUS);
-        else if(i == TIPO_ESPADAS) return generateRandomCarta(TIPO_ESPADAS);
-        else if(i == TIPO_COPAS)   return generateRandomCarta(TIPO_COPAS);
-        else if(i == TIPO_OUROS)   return generateRandomCarta(TIPO_OUROS);
-        else throw new Exception("Há um erro de lógica na classe Carta. O valor de tipo: " + i + " não é permitido");
+        /*Não gosto da estrutura switch - case*/
+        if(i == TIPO_PAUS)         return generateRandomCarta(TIPO_PAUS);   //Retona uma carta do tipo de paus
+        else if(i == TIPO_ESPADAS) return generateRandomCarta(TIPO_ESPADAS);//Retona uma carta do tipo de espadas
+        else if(i == TIPO_COPAS)   return generateRandomCarta(TIPO_COPAS);  //Retona uma carta do tipo de copas
+        else if(i == TIPO_OUROS)   return generateRandomCarta(TIPO_OUROS);  //Retona uma carta do tipo de ouros
+        else throw new Exception("Há um erro de lógica na classe Carta. O valor de tipo: " + i + " não é permitido"); //Caso nenhum dos tipos seja selecionado quer dizer que há um erro na implementação da função rand(), caso isto ocorra irá retornar esse erro
+        
     }
 
+    //Sobrescreve o método "toString" da classe "Object" (o qual está implicitamente extendida)
     @Override
     public String toString() {
         return "Carta[valorNum=" + getValorNumerico() + ", nomeCarta=" + getNomeDaCarta() + "]";
